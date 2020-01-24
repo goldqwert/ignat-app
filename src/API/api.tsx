@@ -6,7 +6,9 @@ const instance = axios.create({
 
 export const auth = {
     register(email: string, password: number) {
-        debugger
         return instance.post('/register', { email, password })
+    },
+    login(email: string, password: number, rememberMe: boolean) {
+        return instance.post('/login', { email, password, rememberMe })
     }
 }

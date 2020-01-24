@@ -1,17 +1,22 @@
-.register {
+.wrapper {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 }
 
-.register input, .register button{
+.wrapper input, .wrapper button{
     margin: 5px;
     padding: 5px;
 }
 
-.register div {
-    height: 20px;
+.wrapper span {
+    font-size: 30px;
+    font-weight: 500;
+}
+
+.wrapper div {
+    height: 25px;
 }
 
 .error {

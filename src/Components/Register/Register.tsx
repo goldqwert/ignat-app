@@ -1,49 +1,54 @@
-import React, { useState, ChangeEvent } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import s from './Register.module.css';
-import { register } from '../../Redux/Reducers/RegisterReducer';
-import { Redirect } from 'react-router-dom';
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import s from '../Forms.module.css'
+import { registerRequest, errorRegisterRequest } from "../../Redux/Reducers/RegisterReducer";
+import { Redirect, NavLink } from "react-router-dom";
 
-interface IProps {
-
-}
+interface IProps { }
 
 const Register = (props: IProps) => {
+  const [email, setEmail] = useState();
+  const [password, setPassword] = useState();
+  const [passwordRepeat, setPasswordRepeat] = useState('');
 
-    const [email, setEmail] = useState();
-    const [password, setPassword] = useState();
-    const loading = useSelector((store: any) => store.register.loading)
-    const redirect = useSelector((store: any) => store.register.redirect)
+  const loading = useSelector((store: any) => store.register.loading);
+  const redirect = useSelector((store: any) => store.register.redirect);
+  const error = useSelector((store: any) => store.register.error);
+  const dispatch = useDispatch();
 
-    const dispatch = useDispatch()
-
-    const sendRegisterData = () => {
-        debugger
-        dispatch(register(email, password))
+  const sendRegisterData = () => {
+    if (passwordRepeat !== password) {
+      dispatch(errorRegisterRequest(`Passwords don't match`))
+    } else if (password.length <= 7) {
+      dispatch(errorRegisterRequest(`Password not valid! must be more than 7 characters...`))
+    } else if (!validate(email)) {
+      dispatch(errorRegisterRequest(`Email is not valid`))
+    } else {
+      dispatch(registerRequest(email, password))
     }
+  };
 
-    const onChangeEmail = (e: ChangeEvent<HTMLInputElement>) => {
-        setEmail(e.currentTarget.value)
-    }
+  if (redirect) {
+    return <Redirect to={"/login"} />;
+  }
 
-    const onChangePass = (e: ChangeEvent<HTMLInputElement>) => {
-        setPassword(e.currentTarget.value)
-    }
+  const validate = (email: string) => {
+    const regExp = /^[\w]{1}[\w-\.]*@[\w-]+\.[a-z]{2,7}$/i;
+    return regExp.test(String(email).toLowerCase())
+  };
 
-    if (redirect) {
-        return <Redirect from='/register' to='/login' />
-    }
 
-    return (
-        <div className={s.wrapper}>
-            <div>Register</div>
-            <input value={email} onChange={onChangeEmail} required />
-            <input type='password' value={password} onChange={onChangePass} required />
-            <input type='password' value={password} required />
-            <button onClick={sendRegisterData} disabled={loading}>Register</button>
-            <a href='/login'>Sign In</a>
-            {loading && <div>Loading...</div>}
-        </div>)
+  return (
+    <div className={s.wrapper}>
+      <span>Register</span>
+      <div>{!loading ? <div className={s.error}>{error}</div> : (loading ? <div>Loading...</div> : null)}</div>
+      <input type="text" placeholder="email" onChange={(e) => setEmail(e.currentTarget.value)} />
+      <input type="password" placeholder="password" onChange={(e) => setPassword(e.currentTarget.value)} />
+      <input type="password" placeholder="repeat password" onChange={(e) => setPasswordRepeat(e.currentTarget.value)} />
+      <button onClick={sendRegisterData} disabled={loading}>Register</button>
+      <NavLink to="/login">Login</NavLink>
+    </div>
+  );
 };
 
 export default Register;
