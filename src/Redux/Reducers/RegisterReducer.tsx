@@ -1,40 +1,54 @@
-import { auth } from '../../API/api';
+import { auth } from "../../API/api";
 
-const LOADING = 'appIgnat/register/LOADING';
-const UNLOADING = 'appIgnat/register/UNLOADING';
-const REDIRECT = 'appIgnat/register/REDIRECT';
-const ERROR = 'appIgnat/register/ERROR'
+const LOADING = "appIgnat/register/LOADING";
+const SUCCESS = "appIgnat/register/REDIRECT";
+const ERROR = "appIgnat/register/ERROR";
 
 const initialState = {
   loading: false,
-  redirect: false,
+  success: false,
   error: ''
 };
+
+// interface IErrorRegistrationDataAction {
+//   type: typeof ERROR_REGISTRATION_DATA;
+//   error: string
+// }
+
+// interface IRegistrationRequestSendAction {
+//   type: typeof REGISTRATION_REQUEST,
+// }
+
+// interface IAuthSuccessAction {
+//   type: typeof AUTH_SUCCESS,
+//   success: boolean
+// }
+
+// interface IInitialStateRegistration {
+//   error: string,
+//   isLoading: boolean,
+//   success: boolean
+// }
 
 const registerReducer = (state = initialState, action: any) => {
   switch (action.type) {
     case LOADING:
       return {
         ...state,
-        loading: true
+        loading: !state.loading
       };
-    case UNLOADING:
+    case SUCCESS:
       return {
         ...state,
-        loading: false
-      };
-    case REDIRECT:
-      return {
-        ...state,
-        redirect: true
+        success: action.success
       };
     case ERROR:
       return {
         ...state,
         error: action.error
       }
+    default: return state;
   }
-  return state;
 };
 
 // interface ILogin {
@@ -42,22 +56,20 @@ const registerReducer = (state = initialState, action: any) => {
 // }
 // type LoginActionsTypes = ILogin
 export const loadingAC = () => ({ type: LOADING });
-export const unloadingAC = () => ({ type: UNLOADING });
-export const redirectAC = () => ({ type: REDIRECT });
-export const errorRegisterRequest = (error: any) => ({ type: ERROR, error });
+export const successAC = (success: boolean) => ({ type: SUCCESS, success });
+export const errorAC = (error: any) => ({ type: ERROR, error });
 
 export default registerReducer;
 
-export const registerRequest = (email: string, password: number) => {
+export const registerRequest = (email: string, password: string) => {
   return async (dispatch: any) => {
     try {
       dispatch(loadingAC());
-      await auth.register(email, password);
-      dispatch(redirectAC());
+      let response = await auth.register(email, password);
+      dispatch(successAC(response.data.success));
     } catch (error) {
-      errorRegisterRequest(error.response.data.error);
-    } finally {
-      dispatch(unloadingAC());
+      errorAC(error.response.data.error);
     }
+    dispatch(loadingAC());
   };
 };

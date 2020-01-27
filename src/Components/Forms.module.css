@@ -10,16 +10,14 @@
     padding: 5px;
 }
 
-.wrapper span {
-    font-size: 30px;
-    font-weight: 500;
-}
-
 .wrapper div {
     height: 25px;
 }
 
 .error {
     color: red;
-    font-weight: bold;
+}
+
+.success {
+    color: green;
 }

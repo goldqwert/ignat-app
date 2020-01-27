@@ -5,13 +5,16 @@ import registerReducer from "./Reducers/RegisterReducer";
 import forgotReducer from "./Reducers/ForgotReducer";
 import profileReducer from "./Reducers/ProfileReducer";
 
-
-let store = createStore(combineReducers({
+const rootReducer = combineReducers({
     login: loginReducer,
     register: registerReducer,
     forgot: forgotReducer,
     profile: profileReducer
 
-}), applyMiddleware(thunk));
+});
 
-export default store
+export type AppStateType = ReturnType<typeof rootReducer>
+
+const store = createStore(rootReducer, applyMiddleware(thunk));
+
+export default store;
