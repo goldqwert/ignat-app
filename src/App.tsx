@@ -5,7 +5,7 @@ import { Route, NavLink } from "react-router-dom";
 import Register from "./Components/Register/Register";
 import Forgot from "./Components/Forgot/Forgot";
 import Profile from "./Components/Profile/Profile";
-import Modals from "./Components/Modals/Modals";
+import ModalsContainer from "./Components/Modals/ModalsContainer";
 import Time from "./Components/Time/Time";
 import Color from "./Components/Color/Color";
 
@@ -26,7 +26,7 @@ const App = () => {
         <Route path="/register" component={Register} />
         <Route path="/forgot" component={Forgot} />
         <Route path="/profile" component={Profile} />
-        <Route path='/modals' component={Modals} />
+        <Route path='/modals' component={ModalsContainer} />
         <Route path='/time' component={Time} />
         <Route path='/color' component={Color} />
       </div>
