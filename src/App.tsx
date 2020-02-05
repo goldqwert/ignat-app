@@ -1,27 +1,34 @@
 import React from "react";
 import "./App.css";
 import Login from "./Components/Login/Login";
-import { Route } from "react-router-dom";
+import { Route, NavLink } from "react-router-dom";
 import Register from "./Components/Register/Register";
 import Forgot from "./Components/Forgot/Forgot";
 import Profile from "./Components/Profile/Profile";
+import Modals from "./Components/Modals/Modals";
+import Time from "./Components/Time/Time";
+import Color from "./Components/Color/Color";
 
-interface IProps { }
-
-const App = (props: IProps) => {
+const App = () => {
   return (
     <div className="App">
       <header className="header">
-        <a href="/login">Login</a>
-        <a href="/register">Register</a>
-        <a href="/forgot">Forgot</a>
-        <a href="/profile">Profile</a>
+        <NavLink to="/login">Login</NavLink>
+        <NavLink to="/register">Register</NavLink>
+        <NavLink to="/forgot">Forgot</NavLink>
+        <NavLink to="/profile">Profile</NavLink>
+        <NavLink to='/modals'>Modals</NavLink>
+        <NavLink to='/time'>Time</NavLink>
+        <NavLink to='/color'>Color</NavLink>
       </header>
       <div>
         <Route path="/login" component={Login} />
         <Route path="/register" component={Register} />
         <Route path="/forgot" component={Forgot} />
         <Route path="/profile" component={Profile} />
+        <Route path='/modals' component={Modals} />
+        <Route path='/time' component={Time} />
+        <Route path='/color' component={Color} />
       </div>
     </div>
   );

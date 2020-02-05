@@ -4,13 +4,14 @@ import loginReducer from "./Reducers/LoginReducer";
 import registerReducer from "./Reducers/RegisterReducer";
 import forgotReducer from "./Reducers/ForgotReducer";
 import profileReducer from "./Reducers/ProfileReducer";
+import booleanReducer from "./Reducers/BooleanReducer";
 
 const rootReducer = combineReducers({
     login: loginReducer,
     register: registerReducer,
     forgot: forgotReducer,
-    profile: profileReducer
-
+    profile: profileReducer,
+    boolean: booleanReducer
 });
 
 export type AppStateType = ReturnType<typeof rootReducer>

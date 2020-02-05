@@ -9,7 +9,6 @@ export const auth = {
         return instance.post("/register", { email, password })
     },
     login(email: string, password: string, rememberMe: boolean) {
-        debugger
         return instance.post("/login", { email, password, rememberMe })
     },
     forgot(email: string) {

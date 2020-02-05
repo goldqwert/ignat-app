@@ -2,19 +2,19 @@ import React, { useState } from "react";
 import s from "../Forms.module.css";
 import { NavLink, Redirect } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { login, errorAC } from "../../Redux/Reducers/LoginReducer";
+import { errorAC } from "../../Redux/Reducers/BooleanReducer";
 import { validate } from "../utils/validate";
+import { AppStateType } from "../../Redux/store";
+import { login } from "../../Redux/Reducers/LoginReducer";
 
 const Login: React.FC = () => {
-
     const [email, setLoginState] = useState("")
     const [password, setPasswordState] = useState("")
     const [rememberMe, setRememberMe] = useState(false)
-    const error = useSelector((store: any) => store.login.error);
+    const error = useSelector((store: AppStateType) => store.boolean.error);
     const isAuth = useSelector((store: any) => store.profile.isAuth);
-    const success = useSelector((store: any) => store.login.success);
-    const loading = useSelector((store: any) => store.login.loading);
-
+    const success = useSelector((store: AppStateType) => store.boolean.success);
+    const loading = useSelector((store: AppStateType) => store.boolean.loading);
     const dispatch = useDispatch()
 
     const sendLoginData = () => {

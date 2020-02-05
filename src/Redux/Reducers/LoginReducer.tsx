@@ -1,66 +1,46 @@
 import { auth } from "../../API/api";
 import { isAuthFailedAC } from "./ProfileReducer";
+import { Dispatch } from "redux";
+import { loadingAC, successAC, errorAC } from "./BooleanReducer";
 
-const LOADING = "appIgnat/login/LOADING"
-const ERROR = "appIgnat/login/ERROR"
-const SUCCESS = "appIgnat/login/SUCCESS"
+interface IState {
+  // loading: boolean
+  // success: boolean
+  // error: string
+}
 
+interface IAction {
+  // type: typeof LOADING | typeof ERROR | typeof SUCCESS
+  // error: string,
+  // success: boolean
+}
 
-const initialState = {
-  loading: false,
-  success: false,
-  error: ''
+const initialState: IState = {
+  // loading: false,
+  // success: false,
+  // error: ''
 };
 
-const loginReducer = (state = initialState, action: any) => {
-  switch (action.type) {
-    case LOADING:
-      return {
-        state,
-        loading: !state.loading
-      };
-    case ERROR:
-      return {
-        state,
-        error: action.error
-      };
-    case SUCCESS:
-      return {
-        state,
-        success: action.success
-      }
-  }
+const loginReducer = (state = initialState, action: IAction) => {
   return state;
 };
-
-// interface ILogin {
-//     type:typeof LOGIN
-// }
-// type LoginActionsTypes=ILogin
-
-// export const loginAC=()=> {
-//     return{type:LOGIN}
-// }
-export const loadingAC = () => ({ type: LOADING });
-export const successAC = (success: boolean) => ({ type: SUCCESS, success });
-export const errorAC = (error: any) => ({ type: ERROR, error });
 
 export default loginReducer;
 
 export const login = (login: string, password: string, rememberMe: boolean) => {
-  return async (dispatch: any) => {
+  return async (dispatch: Dispatch) => {
     try {
       dispatch(loadingAC())
       let response = await auth.login(login, password, rememberMe);
       if (response.data.rememberMe) {
-        localStorage.setItem('stringToken', response.data.token)
+        localStorage.setItem("stringToken", response.data.token)
         dispatch(successAC(true));
       }
       dispatch(isAuthFailedAC())
-      // dispatch(isAuthSuccessAC())
     } catch (e) {
-      dispatch(errorAC(e.response.data));
+      dispatch(errorAC(e.response.data.error));
     };
-    dispatch(loadingAC());
+    dispatch(loadingAC())
+    dispatch(successAC(false));
   }
 }

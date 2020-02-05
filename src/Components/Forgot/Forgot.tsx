@@ -3,22 +3,18 @@ import { NavLink } from "react-router-dom";
 import s from "../Forms.module.css"
 import { validate } from "../utils/validate";
 import { useDispatch, useSelector } from "react-redux";
-import { errorAC, forgot } from "../../Redux/Reducers/ForgotReducer";
+import { errorAC } from "../../Redux/Reducers/BooleanReducer";
+import { AppStateType } from "../../Redux/store";
+import { forgot } from "../../Redux/Reducers/ForgotReducer";
 
-interface IProps {
-
-}
-
-const Forgot = (props: IProps) => {
-
+const Forgot: React.FC = () => {
     const [email, setEmail] = useState("")
-    const error = useSelector((store: any) => store.forgot.error);
-    const success = useSelector((store: any) => store.forgot.success);
-    const loading = useSelector((store: any) => store.forgot.loading);
+    const error = useSelector((store: AppStateType) => store.boolean.error);
+    const success = useSelector((store: AppStateType) => store.boolean.success);
+    const loading = useSelector((store: AppStateType) => store.boolean.loading);
     const dispatch = useDispatch()
 
     const sendForgotData = () => {
-        debugger
         if (!validate(email)) {
             dispatch(errorAC(`Email is not valid!`))
         } else if (!success) {

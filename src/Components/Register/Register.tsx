@@ -1,20 +1,20 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import s from '../Forms.module.css'
-import { registerRequest, errorAC } from "../../Redux/Reducers/RegisterReducer";
+import { registerRequest } from "../../Redux/Reducers/RegisterReducer";
 import { Redirect, NavLink } from "react-router-dom";
 import { validate } from "../utils/validate";
+import { AppStateType } from "../../Redux/store";
+import { errorAC } from "../../Redux/Reducers/BooleanReducer";
 
-interface IProps { }
-
-const Register = (props: IProps) => {
+const Register: React.FC = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordRepeat, setPasswordRepeat] = useState("");
 
-  const loading = useSelector((store: any) => store.register.loading);
-  const success = useSelector((store: any) => store.register.success);
-  const error = useSelector((store: any) => store.register.error);
+  const loading = useSelector((store: AppStateType) => store.boolean.loading);
+  const success = useSelector((store: AppStateType) => store.boolean.success);
+  const error = useSelector((store: AppStateType) => store.boolean.error);
   const dispatch = useDispatch();
 
   const sendRegisterData = () => {

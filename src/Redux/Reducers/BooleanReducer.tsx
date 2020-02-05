@@ -1,46 +1,36 @@
-import { auth } from "../../API/api";
-
 const LOADING = "appIgnat/register/LOADING";
-const REDIRECT = "appIgnat/register/REDIRECT";
+const SUCCESS = "appIgnat/register/REDIRECT";
 const ERROR = "appIgnat/register/ERROR";
 
-const initialState = {
+interface IState {
+  loading: boolean
+  success: boolean
+  error: string
+}
+
+interface IAction {
+  type: typeof LOADING | typeof ERROR | typeof SUCCESS
+  error: string,
+  success: boolean
+}
+
+const initialState: IState = {
   loading: false,
   success: false,
   error: ''
 };
 
-// interface IErrorRegistrationDataAction {
-//   type: typeof ERROR_REGISTRATION_DATA;
-//   error: string
-// }
-
-// interface IRegistrationRequestSendAction {
-//   type: typeof REGISTRATION_REQUEST,
-// }
-
-// interface IAuthSuccessAction {
-//   type: typeof AUTH_SUCCESS,
-//   success: boolean
-// }
-
-// interface IInitialStateRegistration {
-//   error: string,
-//   isLoading: boolean,
-//   success: boolean
-// }
-
-const registerReducer = (state = initialState, action: any) => {
+const booleanReducer = (state = initialState, action: IAction) => {
   switch (action.type) {
     case LOADING:
       return {
         ...state,
         loading: !state.loading
       };
-    case REDIRECT:
+    case SUCCESS:
       return {
         ...state,
-        success: true
+        success: action.success
       };
     case ERROR:
       return {
@@ -51,25 +41,8 @@ const registerReducer = (state = initialState, action: any) => {
   }
 };
 
-// interface ILogin {
-//     type: typeof REGISTER
-// }
-// type LoginActionsTypes = ILogin
 export const loadingAC = () => ({ type: LOADING });
-export const success = () => ({ type: REDIRECT });
-export const errorRegisterRequest = (error: any) => ({ type: ERROR, error });
+export const successAC = (success: boolean) => ({ type: SUCCESS, success });
+export const errorAC = (error: string) => ({ type: ERROR, error });
 
-export default registerReducer;
-
-export const registerRequest = (email: string, password: string) => {
-  return async (dispatch: any) => {
-    try {
-      dispatch(loadingAC());
-      await auth.register(email, password);
-      dispatch(success());
-    } catch (error) {
-      errorRegisterRequest(error.response.data.error);
-    }
-    dispatch(loadingAC());
-  };
-};
+export default booleanReducer;
