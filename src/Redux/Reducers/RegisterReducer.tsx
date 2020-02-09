@@ -33,6 +33,9 @@ export const registerRequest = (email: string, password: string) => {
       dispatch(successAC(response.data.success));
     } catch (e) {
       dispatch(errorAC(e.response.data.error));
+      setTimeout(() => {
+        dispatch(errorAC(''))
+      }, 3000);
     }
     dispatch(loadingAC());
     dispatch(successAC(false));

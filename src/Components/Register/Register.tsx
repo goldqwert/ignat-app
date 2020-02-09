@@ -27,6 +27,9 @@ const Register: React.FC = () => {
     } else {
       dispatch(registerRequest(email, password))
     }
+    setTimeout(() => {
+      dispatch(errorAC(''))
+  }, 5000);
   };
 
   if (success) {

@@ -27,6 +27,9 @@ const Login: React.FC = () => {
         } else {
             dispatch(login(email, password, rememberMe))
         }
+        setTimeout(() => {
+            dispatch(errorAC(''))
+        }, 5000);
     };
 
     if (!isAuth) {

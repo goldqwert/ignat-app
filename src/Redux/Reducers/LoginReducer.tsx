@@ -39,6 +39,9 @@ export const login = (login: string, password: string, rememberMe: boolean) => {
       dispatch(isAuthFailedAC())
     } catch (e) {
       dispatch(errorAC(e.response.data.error));
+      setTimeout(() => {
+        dispatch(errorAC(''))
+      }, 3000);
     };
     dispatch(loadingAC())
     dispatch(successAC(false));

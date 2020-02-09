@@ -8,6 +8,7 @@ import Profile from "./Components/Profile/Profile";
 import ModalsContainer from "./Components/Modals/ModalsContainer";
 import Time from "./Components/Time/Time";
 import Color from "./Components/Color/Color";
+import ShopTable from "./Components/ShopTable/ShopTable"
 
 const App = () => {
   return (
@@ -20,6 +21,7 @@ const App = () => {
         <NavLink to='/modals'>Modals</NavLink>
         <NavLink to='/time'>Time</NavLink>
         <NavLink to='/color'>Color</NavLink>
+        <NavLink to='/shop-table'>ShopTable</NavLink>
       </header>
       <div>
         <Route path="/login" component={Login} />
@@ -29,6 +31,7 @@ const App = () => {
         <Route path='/modals' component={ModalsContainer} />
         <Route path='/time' component={Time} />
         <Route path='/color' component={Color} />
+        <Route path='/shop-table' component={ShopTable} />
       </div>
     </div>
   );
