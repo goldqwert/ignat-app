@@ -5,8 +5,8 @@ const NAME = "appIgnat/profile/NAME"
 const isAUTH = "appIgnat/profile/isAUTH"
 
 interface IState {
-    name: string
-    isAuth: boolean
+    // name: string
+    // isAuth: boolean
 }
 
 interface IAction {

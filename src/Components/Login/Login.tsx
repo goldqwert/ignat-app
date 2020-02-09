@@ -12,7 +12,7 @@ const Login: React.FC = () => {
     const [password, setPasswordState] = useState("")
     const [rememberMe, setRememberMe] = useState(false)
     const error = useSelector((store: AppStateType) => store.boolean.error);
-    const isAuth = useSelector((store: any) => store.profile.isAuth);
+    const isAuth = useSelector((store: AppStateType) => store.boolean.isAuth);
     const success = useSelector((store: AppStateType) => store.boolean.success);
     const loading = useSelector((store: AppStateType) => store.boolean.loading);
     const dispatch = useDispatch()
@@ -33,7 +33,7 @@ const Login: React.FC = () => {
     };
 
     if (!isAuth) {
-        return <Redirect to="/profile" />
+        return <Redirect to="/register" />
     }
 
     return (

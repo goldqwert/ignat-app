@@ -2,10 +2,12 @@ const LOADING = "appIgnat/register/LOADING";
 const SUCCESS = "appIgnat/register/REDIRECT";
 const ERROR = "appIgnat/register/ERROR";
 
-interface IState {
+export interface IState {
   loading: boolean
   success: boolean
   error: string
+  name?: string
+  isAuth?: boolean
 }
 
 interface IAction {
