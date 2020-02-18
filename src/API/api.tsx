@@ -33,5 +33,10 @@ export const shop = {
     },
     deleteProduct(id: string | undefined) {
         return instance.delete(`/shop?id=${id}`)
+    },
+    buyProductAPI(id: string | undefined) {
+        debugger
+        return instance.post('/shop/buy', id)
+            .then(response => { alert(response.data.answer) })
     }
 }

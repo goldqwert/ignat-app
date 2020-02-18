@@ -1,16 +1,43 @@
-import React, { useState } from 'react';
-import moment from 'moment';
-import TimePicker from "rc-time-picker";
-import 'rc-time-picker/assets/index.css';
+import React, { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { AppStateType } from "../../Redux/store";
+import { getProductsTC, updateProductTC } from "../../Redux/Reducers/ShopReducer";
+import "./ShopTable.css"
+import ShopAdd from "./ShopModals/ShopAdd";
+import ShopDelete from './ShopModals/ShopDelete';
+import ShopItem from './ShopItem';
 
-const Basket = () => {
+const ShopTable = () => {
+
+    let dispatch = useDispatch();
+    useEffect(() => {
+        dispatch(getProductsTC())
+    }, [])
+
+    const products = useSelector((store: AppStateType) => store.shop.basket);
+
+    let allProducts = products.map(p => {
+        return <ShopItem key={p.id} p={p} />
+    })
 
     return (
         <div>
-           ShopTable
-        </div>
-    )
-
+            <h2>Basket</h2>
+            <ShopAdd />
+            <table className="table-fill">
+                <thead>
+                    <tr>
+                        <th className="text-left">Product name</th>
+                        <th className="text-left">Price</th>
+                        <th className="text-left">Product type</th>
+                        <th className="text-left">Rating</th>
+                        <th className="text-left">Settings</th>
+                    </tr>
+                </thead>
+                <tbody className="table-hover"></tbody>
+                {allProducts}
+            </table>
+        </div>)
 };
 
-export default Basket;
+export default ShopTable;

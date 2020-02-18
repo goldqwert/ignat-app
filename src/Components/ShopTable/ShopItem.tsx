@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { AppStateType } from "../../Redux/store";
-import { getProductsTC, updateProductTC } from "../../Redux/Reducers/ShopReducer";
+import { getProductsTC, updateProductTC, buyProductTC } from "../../Redux/Reducers/ShopReducer";
 import "./ShopTable.css"
-import ShopAdd from "./ShopModals/ShopAdd";
 import ShopDelete from './ShopModals/ShopDelete';
 
 interface IProps {
@@ -23,7 +22,7 @@ const ShopItem = ({ p }: IProps) => {
         dispatch(getProductsTC())
     }, [])
 
-    const products = useSelector((store: AppStateType) => store.shop.products);
+    // const products = useSelector((store: AppStateType) => store.shop.products);
 
     const updateProduct = (id: string | undefined, productName: string, price: number) => {
         let updatedProduct = {
@@ -56,6 +55,7 @@ const ShopItem = ({ p }: IProps) => {
                     <td className="text-left"><ShopDelete id={p.id} />
                         <button onClick={() => { updateProduct(p.id, p.productName, p.price) }}>update</button>
                         <button onClick={() => { setEditMode(true) }}>edit</button>
+                        <button onClick={() => { buyProductTC(p.id) }}>buy</button>
                     </td>
                 </tr>}
         </>)

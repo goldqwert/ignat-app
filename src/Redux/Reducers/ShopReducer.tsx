@@ -4,9 +4,11 @@ import { ThunkDispatch } from "redux-thunk";
 import { AppStateType } from "../store";
 
 const SET_PRODUCTS = "appIgnat/shop/SET_PRODUCTS"
+const BUY_PRODUCT_IN_BASKET = "appIgnat/shop/BUY_PRODUCT_IN_BASKET"
 
 interface IState {
     products: IProducts[]
+    basket: IProducts[]
 }
 interface IProducts {
     id?: string
@@ -24,13 +26,16 @@ export interface IProduct {
     productName: string,
     price: number
 }
+
 interface IAction {
-    type: typeof SET_PRODUCTS
+    type: typeof SET_PRODUCTS | typeof BUY_PRODUCT_IN_BASKET
     products: IProducts[]
+    basket: IProducts[]
 }
 
 const initialState: IState = {
-    products: []
+    products: [],
+    basket: []
 };
 
 const shopReducer = (state: IState = initialState, action: IAction) => {
@@ -40,11 +45,17 @@ const shopReducer = (state: IState = initialState, action: IAction) => {
                 ...state,
                 products: action.products
             }
+        case BUY_PRODUCT_IN_BASKET: {
+            return {
+                ...state, cart: [...state.basket.filter(p => !p.value)]
+            }
+        }
         default: return state
     }
 };
 
 export const setProducts = (products: IProducts) => ({ type: SET_PRODUCTS, products })
+export const buyProductInBasket = (id: string | undefined) => ({ type: BUY_PRODUCT_IN_BASKET, id })
 
 export default shopReducer;
 
@@ -84,6 +95,18 @@ export const deleteProductTC = (id: string | undefined) => {
         try {
             await shop.deleteProduct(id);
             await dispatch(getProductsTC())
+        } catch (e) {
+            alert(e.response ? e.response.data.error : e.message)
+        }
+    }
+}
+
+export const buyProductTC = (id: string | undefined) => {
+    debugger
+    return async (dispatch: Dispatch) => {
+        try {
+            await shop.buyProductAPI(id);
+            await dispatch(buyProductInBasket(id));
         } catch (e) {
             alert(e.response ? e.response.data.error : e.message)
         }
