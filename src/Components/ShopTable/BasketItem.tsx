@@ -9,7 +9,7 @@ interface IProps {
     p: any
 }
 
-const ShopItem = ({ p }: IProps) => {
+const BasketItem = ({ p }: IProps) => {
 
     const [editMode, setEditMode] = useState(false);
     const [productName, setProductName] = useState('');
@@ -71,4 +71,4 @@ const ShopItem = ({ p }: IProps) => {
         </>)
 };
 
-export default ShopItem;
+export default BasketItem;

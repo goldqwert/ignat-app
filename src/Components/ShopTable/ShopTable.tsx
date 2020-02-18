@@ -13,9 +13,9 @@ const ShopTable = () => {
         dispatch(getProductsTC())
     }, [])
 
-    const products = useSelector((store: AppStateType) => store.shop.products);
+    const products = useSelector((store: any) => store.shop.products);
 
-    let allProducts = products.map(p => {
+    let allProducts = products.map((p: any) => {
         return <ShopItem key={p.id} p={p} />
     })
 

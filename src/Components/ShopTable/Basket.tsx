@@ -4,8 +4,7 @@ import { AppStateType } from "../../Redux/store";
 import { getProductsTC, updateProductTC } from "../../Redux/Reducers/ShopReducer";
 import "./ShopTable.css"
 import ShopAdd from "./ShopModals/ShopAdd";
-import ShopDelete from './ShopModals/ShopDelete';
-import ShopItem from './ShopItem';
+import BasketItem from './BasketItem';
 
 const ShopTable = () => {
 
@@ -14,10 +13,10 @@ const ShopTable = () => {
         dispatch(getProductsTC())
     }, [])
 
-    const products = useSelector((store: AppStateType) => store.shop.basket);
+    const products = useSelector((store: any) => store.shop.basket);
 
-    let allProducts = products.map(p => {
-        return <ShopItem key={p.id} p={p} />
+    let allProducts = products.map((p: any) => {
+        return <BasketItem key={p.id} p={p} />
     })
 
     return (
