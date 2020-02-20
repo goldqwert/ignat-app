@@ -28,7 +28,6 @@ const ShopTable = () => {
                     <tr>
                         <th className="text-left">Product name</th>
                         <th className="text-left">Price</th>
-                        <th className="text-left">Product type</th>
                         <th className="text-left">Rating</th>
                         <th className="text-left">Settings</th>
                     </tr>

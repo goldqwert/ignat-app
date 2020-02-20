@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux';
 
 interface IProps {
     id: string | undefined
+    deleteMethod: (id: string | undefined) => void
 }
 
 const ShopDelete = (props: IProps) => {
@@ -14,7 +15,8 @@ const ShopDelete = (props: IProps) => {
     const closeModal = () => { setShow(false) }
     const dispatch = useDispatch()
     const closeModalAnswerYes = () => {
-        dispatch(deleteProductTC(props.id))
+        props.deleteMethod(props.id)
+        // dispatch(deleteProductTC(props.id))
         setShow(false)
     }
 
