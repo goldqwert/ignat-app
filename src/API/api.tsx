@@ -39,3 +39,9 @@ export const shop = {
             .then(response => { alert(response.data.answer) })
     }
 }
+
+export const users = {
+    getUsers() {
+        return instance.get("/users")
+    }
+}

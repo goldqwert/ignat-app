@@ -45,7 +45,7 @@ interface IActionBuyProductsInBasket {
 }
 
 interface IDeleteProductsInBasket {
-    type: typeof DELETE_PRODUCTS_IN_BASKET
+    type: typeof DELETE_PRODUCTS_IN_BASKET,
 }
 
 interface IChangeValueProductInCart {
@@ -78,6 +78,7 @@ const shopReducer = (state: IState = initialState, action: IAction) => {
             }
         }
         case DELETE_PRODUCTS_IN_BASKET: {
+            debugger
             return {
                 ...state, basket: [...state.basket.filter(p => !p.value)]
             }

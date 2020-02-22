@@ -6,6 +6,7 @@ import forgotReducer from "./Reducers/ForgotReducer";
 import profileReducer from "./Reducers/ProfileReducer";
 import booleanReducer from "./Reducers/BooleanReducer";
 import shopReducer from "./Reducers/ShopReducer";
+import usersReducer from "./Reducers/UsersReducer";
 
 const rootReducer = combineReducers({
     login: loginReducer,
@@ -13,7 +14,8 @@ const rootReducer = combineReducers({
     forgot: forgotReducer,
     profile: profileReducer,
     boolean: booleanReducer,
-    shop: shopReducer
+    shop: shopReducer,
+    privateChat: usersReducer
 });
 
 export type AppStateType = ReturnType<typeof rootReducer>

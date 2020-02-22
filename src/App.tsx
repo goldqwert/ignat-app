@@ -10,6 +10,11 @@ import Time from "./Components/Time/Time";
 import Color from "./Components/Color/Color";
 import ShopTable from "./Components/ShopTable/ShopTable"
 import Basket from "./Components/ShopTable/Basket";
+import Audio from "./Components/Audio/Audio";
+import Video from "./Components/Video/Video";
+import Redactor from "./Components/Redactor/Redactor";
+import Users from "./Components/Users/Users";
+import Chat from "./Components/Chat/Chat";
 
 const App = () => {
   return (
@@ -24,6 +29,11 @@ const App = () => {
         <NavLink to='/color'>Color</NavLink>
         <NavLink to='/shop-table'>ShopTable</NavLink>
         <NavLink to='/basket'>Basket</NavLink>
+        <NavLink to='/audio'>Audio</NavLink>
+        <NavLink to='/video'>Video</NavLink>
+        <NavLink to='/redactor'>Redactor</NavLink>
+        <NavLink to='/users'>Users</NavLink>
+        <NavLink to='/chat'>Chat</NavLink>
       </header>
       <div>
         <Route path="/login" component={Login} />
@@ -35,6 +45,11 @@ const App = () => {
         <Route path='/color' component={Color} />
         <Route path='/shop-table' component={ShopTable} />
         <Route path='/basket' component={Basket} />
+        <Route path='/audio' component={Audio} />
+        <Route path='/video' component={Video} />
+        <Route path='/redactor' component={Redactor} />
+        <Route path='/users' component={Users} />
+        <Route path='/chat' component={Chat} />
       </div>
     </div>
   );

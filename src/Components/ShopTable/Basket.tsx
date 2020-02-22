@@ -15,7 +15,7 @@ const ShopTable = () => {
 
     const products = useSelector((store: any) => store.shop.basket);
 
-    let allProducts = products.map((p: any, index: number) => {
+    let allProducts = (products).map((p: any, index: number) => {
         return <BasketItem key={p.id} p={p} index={p.index} />
     })
 

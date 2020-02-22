@@ -15,9 +15,10 @@ const ShopDelete = (props: IProps) => {
     const closeModal = () => { setShow(false) }
     const dispatch = useDispatch()
     const closeModalAnswerYes = () => {
+        setShow(false)
         props.deleteMethod(props.id)
         // dispatch(deleteProductTC(props.id))
-        setShow(false)
+
     }
 
     const closeModalAnswerNo = () => { setShow(false) }

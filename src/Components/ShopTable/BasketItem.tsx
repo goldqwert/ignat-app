@@ -17,6 +17,7 @@ const BasketItem = ({ p, index }: IProps) => {
     const [price, setPrice] = useState();
     const [productType, setProductType] = useState('');
     const [rating, setRating] = useState();
+    const delItem = true;
 
     let dispatch = useDispatch();
     useEffect(() => {
@@ -45,7 +46,7 @@ const BasketItem = ({ p, index }: IProps) => {
         dispatch(addProductInBasket(product))
     }
 
-    const deleteMethod = (id: string | undefined) => {
+    const deleteMethod = () => {
         dispatch(deleteProductInBasket())
     }
 
@@ -61,8 +62,8 @@ const BasketItem = ({ p, index }: IProps) => {
                 <td className="text-left"><input type='number' onChange={(e) => { setPrice(e.currentTarget.value) }} /></td>
                 <td className="text-left"><input onChange={(e) => { setProductType(e.currentTarget.value) }} /></td>
                 <td className="text-left"><input type='number' onChange={(e) => { setRating(e.currentTarget.value) }} /></td>
-                <td className="text-left"><ShopDelete id={p.id} deleteMethod={deleteMethod} />
-                    <button onClick={() => { updateProduct(p.id, p.productName, p.price) }}>update</button>
+                {/* <td className="text-left"><ShopDelete id={p.id} deleteMethod={deleteMethod} /> */}
+                <td><button onClick={() => { updateProduct(p.id, p.productName, p.price) }}>update</button>
                     <button onClick={() => { updateProduct(p.id, productName, price) }}>save</button>
                 </td></tr >
                 : <tr key={p.index} >
@@ -70,8 +71,10 @@ const BasketItem = ({ p, index }: IProps) => {
                     <td className="text-left">{p.price}</td>
                     <td className="text-left">{p.productType}</td>
                     <td className="text-left">{p.rating}</td>
-                    <td className="text-left"><ShopDelete id={p.id} deleteMethod={deleteMethod} />
+                    <td className="text-left">
                         <button onClick={() => { updateProduct(p.id, p.productName, p.price) }}>update</button>
+                        {/* <ShopDelete id={p.id} deleteMethod={deleteMethod} /> */}
+                        <button onClick={deleteMethod}>delete</button>
                         <button onClick={() => { setEditMode(true) }}>edit</button>
                         <button onClick={() => { dispatch(buyProductTC(p.id)) }}>buy</button>
                         <button onClick={() => { addInBasket(p.id, p.productName, p.price) }}>add in basket</button>
